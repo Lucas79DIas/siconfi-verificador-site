@@ -392,34 +392,41 @@
     });
   });
 
-  function enviarInteresse() {
+  async function enviarInteresse() {
     var nome  = document.getElementById('inputNome').value.trim();
     var email = document.getElementById('inputEmail').value.trim();
     var org   = document.getElementById('inputOrg').value.trim();
     var msg   = document.getElementById('inputMsg').value.trim();
-
+  
     if (!nome || !email) {
       alert('Por favor, preencha nome e e-mail.');
       return;
     }
-
-    var nl = String.fromCharCode(10);
-    var corpo = [
-      'Nome: ' + nome,
-      'E-mail: ' + email,
-      'organização: ' + (org || 'Nao informado'),
-      'Plano de interesse: ' + planoSelecionado,
-      '',
-      'Mensagem: ' + (msg || 'Nenhuma mensagem adicional.')
-    ].join(nl);
-
-    var assunto = encodeURIComponent('Interesse no SICONFI Verificador - Plano ' + planoSelecionado);
-    window.location.href = 'mailto:siconfiverificador@gmail.com?subject=' + assunto + '&body=' + encodeURIComponent(corpo);
-
-    setTimeout(function() {
-      document.getElementById('modalForm').style.display = 'none';
-      document.getElementById('modalSucesso').style.display = 'block';
-    }, 500);
+  
+    var payload = {
+      nome: nome,
+      email: email,
+      organizacao: org || 'Não informado',
+      plano: planoSelecionado,
+      mensagem: msg || 'Nenhuma mensagem adicional.'
+    };
+  
+    try {
+      var response = await fetch('https://formspree.io/f/mqegoopr', { // <-- URL aqui
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+  
+      if (response.ok) {
+        document.getElementById('modalForm').style.display = 'none';
+        document.getElementById('modalSucesso').style.display = 'block';
+      } else {
+        alert('Erro ao enviar. Tente novamente.');
+      }
+    } catch (err) {
+      alert('Erro de conexão. Tente novamente.');
+    }
   }
 </script>
 </body>
