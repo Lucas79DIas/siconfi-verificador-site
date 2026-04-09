@@ -141,6 +141,27 @@
   footer a { font-size:0.8rem; color:rgba(255,255,255,0.35); text-decoration:none; transition:color 0.2s; }
   footer a:hover { color:var(--ouro2); }
 
+
+  /* Modal de interesse */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+  .modal-overlay.aberto { display:flex; }
+  .modal-box { background:white; border-radius:16px; padding:2.5rem; width:100%; max-width:480px; margin:1rem; position:relative; animation:fadeUp 0.3s ease; }
+  .modal-box h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--escuro); margin-bottom:0.5rem; }
+  .modal-box p { font-size:0.9rem; color:var(--cinza); margin-bottom:1.5rem; line-height:1.6; }
+  .modal-close { position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.3rem; color:#aaa; cursor:pointer; width:auto; padding:0; }
+  .modal-close:hover { color:var(--escuro); }
+  .modal-group { margin-bottom:1rem; }
+  .modal-group label { display:block; font-size:0.82rem; font-weight:600; color:var(--escuro); margin-bottom:0.35rem; }
+  .modal-group input, .modal-group textarea { width:100%; padding:0.65rem 0.75rem; border:1px solid #ddd; border-radius:6px; font-size:0.9rem; font-family:'DM Sans',sans-serif; outline:none; transition:border-color 0.2s; resize:none; }
+  .modal-group input:focus, .modal-group textarea:focus { border-color:var(--verde2); }
+  .modal-plano { display:inline-block; background:rgba(41,128,185,0.1); color:var(--verde2); font-size:0.75rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; margin-bottom:1.25rem; letter-spacing:0.06em; text-transform:uppercase; }
+  .btn-enviar { background:linear-gradient(135deg,var(--verde2),var(--verde)); color:white; border:none; border-radius:8px; padding:0.8rem 1.5rem; font-size:0.95rem; font-weight:600; cursor:pointer; width:100%; transition:all 0.2s; margin-top:0.5rem; }
+  .btn-enviar:hover { opacity:0.9; transform:translateY(-1px); }
+  .modal-sucesso { display:none; text-align:center; padding:1rem 0; }
+  .modal-sucesso .check { font-size:3rem; margin-bottom:1rem; }
+  .modal-sucesso h4 { font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--escuro); margin-bottom:0.5rem; }
+  .modal-sucesso p { font-size:0.88rem; color:var(--cinza); }
+
   @media (max-width:900px) {
     nav { padding:1.25rem 1.5rem; }
     .nav-links { display:none; }
@@ -269,7 +290,7 @@
         <li>Suporte por e-mail</li>
         <li>Acesso ao sistema 24h por dia</li>
       </ul>
-      <a href="https://verificador-production.up.railway.app/login" class="btn-preco">Comecar agora</a>
+      <button class="btn-preco" onclick="abrirInteresse('Basico')">Tenho interesse</button>
     </div>
     <div class="preco-card destaque">
       <div class="preco-badge">Mais popular</div>
@@ -283,7 +304,7 @@
         <li>Suporte prioritario</li>
         <li>Acesso antecipado a novos recursos</li>
       </ul>
-      <a href="https://verificador-production.up.railway.app/login" class="btn-preco">Comecar agora</a>
+      <button class="btn-preco" onclick="abrirInteresse('Escritorio')">Tenho interesse</button>
     </div>
   </div>
   <p class="preco-nota">Interesse em licitacao municipal? <a href="mailto:contato@exemplo.com" style="color:rgba(93,173,226,0.8);text-decoration:none;">Entre em contato</a> para discutir contrato institucional.</p>
@@ -304,6 +325,99 @@
     <a href="https://verificador-production.up.railway.app/login">Acessar sistema</a>
   </div>
 </footer>
+
+
+<div class="modal-overlay" id="modalInteresse">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
+    <div id="modalForm">
+      <h3>Quero participar</h3>
+      <p>Estamos em fase inicial e entramos em contato pessoalmente com cada interessado. Deixe seus dados e te procuramos em breve.</p>
+      <div class="modal-plano" id="modalPlanoLabel"></div>
+      <div class="modal-group">
+        <label>Seu nome</label>
+        <input type="text" id="inputNome" placeholder="Ex: Maria Silva">
+      </div>
+      <div class="modal-group">
+        <label>E-mail</label>
+        <input type="email" id="inputEmail" placeholder="seu@email.com">
+      </div>
+      <div class="modal-group">
+        <label>Municipio ou escritorio que representa</label>
+        <input type="text" id="inputOrg" placeholder="Ex: Prefeitura de Belo Horizonte">
+      </div>
+      <div class="modal-group">
+        <label>Mensagem (opcional)</label>
+        <textarea id="inputMsg" rows="3" placeholder="Conte um pouco sobre sua necessidade..."></textarea>
+      </div>
+      <button class="btn-enviar" onclick="enviarInteresse()">Enviar interesse</button>
+    </div>
+    <div class="modal-sucesso" id="modalSucesso">
+      <div class="check">✅</div>
+      <h4>Recebemos seu interesse!</h4>
+      <p>Entraremos em contato em breve no e-mail informado. Obrigado pela confianca!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  let planoSelecionado = '';
+
+  function abrirInteresse(plano) {
+    planoSelecionado = plano;
+    document.getElementById('modalPlanoLabel').textContent = 'Plano ' + plano;
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('modalSucesso').style.display = 'none';
+    document.getElementById('modalInteresse').classList.add('aberto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    document.getElementById('modalInteresse').classList.remove('aberto');
+    document.body.style.overflow = '';
+  }
+
+  // Fechar ao clicar fora
+  document.getElementById('modalInteresse').addEventListener('click', function(e) {
+    if (e.target === this) fecharModal();
+  });
+
+  function enviarInteresse() {
+    const nome  = document.getElementById('inputNome').value.trim();
+    const email = document.getElementById('inputEmail').value.trim();
+    const org   = document.getElementById('inputOrg').value.trim();
+    const msg   = document.getElementById('inputMsg').value.trim();
+
+    if (!nome || !email) {
+      alert('Por favor, preencha nome e e-mail.');
+      return;
+    }
+
+    // Monta o mailto com os dados preenchidos
+    const assunto = encodeURIComponent('Interesse no SICONFI Verificador - Plano ' + planoSelecionado);
+    const corpo   = encodeURIComponent(
+      'Nome: ' + nome + '
+' +
+      'E-mail: ' + email + '
+' +
+      'Organizacao: ' + (org || 'Nao informado') + '
+' +
+      'Plano de interesse: ' + planoSelecionado + '
+
+' +
+      'Mensagem:
+' + (msg || 'Nenhuma mensagem adicional.')
+    );
+
+    window.location.href = 'mailto:siconfiverificador@gmail.com?subject=' + assunto + '&body=' + corpo;
+
+    // Mostra confirmação
+    setTimeout(() => {
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSucesso').style.display = 'block';
+    }, 500);
+  }
+</script>
 
 </body>
 </html>
