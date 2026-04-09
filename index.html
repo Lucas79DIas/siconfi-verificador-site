@@ -176,16 +176,20 @@
     .stat { min-width:50%; }
     footer { flex-direction:column; gap:0.75rem; text-align:center; }
   }
+  .skip-link{position:absolute;top:-100px;left:1rem;background:#1a5276;color:white;padding:.5rem 1.25rem;border-radius:0 0 6px 6px;font-weight:700;font-size:.875rem;text-decoration:none;z-index:9999;transition:top .2s;}
+  .skip-link:focus{top:0;}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #5dade2;outline-offset:3px;border-radius:4px;}
 </style>
 </head>
 <body>
+<a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
 
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <nav>
+  <nav aria-label="Navegação principal">
     <div class="logo">
-      <div class="logo-mark">S</div>
+      <div class="logo-mark" aria-hidden="true">S</div>
       <div class="logo-text">SICONFI <span>Verificador</span></div>
     </div>
     <ul class="nav-links">
@@ -195,6 +199,7 @@
       <li><a href="#precos">Planos</a></li>
       <li><a href="https://verificador-production.up.railway.app/login" class="nav-cta">Acessar sistema</a></li>
     </ul>
+    <button class="nav-interesse" onclick="abrirInteresse('Nav')" aria-label="Demonstrar interesse nos planos">Tenho interesse</button>
   </nav>
   <div class="hero-content">
     <div class="hero-badge">Ferramenta de Auxílio à Prestação de Contas</div>
@@ -213,11 +218,12 @@
   </div>
 </section>
 
-<section class="problema" id="problema">
+<main id="conteudo-principal">
+<section class="problema" id="problema" aria-labelledby="titulo-problema">
   <div class="problema-grid">
     <div>
       <div class="section-label">O problema</div>
-      <h2 class="section-title" style="color:white;max-width:100%;">A MSC errada custa caro para o municipio</h2>
+      <h2 class="section-title" style="color:white;max-width:100%;" id="titulo-problema">A MSC errada custa caro para o municipio</h2>
       <p class="problema-text">O Ranking de Qualidade do Siconfi avalia automáticamente dezenas de criterios. Erros que parecem pequenos como uma conta sem natureza de despesa ou um saldo inconsistente impactam diretamente a pontuacão do municipio e podem sinalizar irregularidades para os tribunais de contas.</p>
     </div>
     <div class="problema-cards">
@@ -229,10 +235,10 @@
   </div>
 </section>
 
-<section class="funcionalidades" id="funcionalidades">
+<section class="funcionalidades" id="funcionalidades" aria-labelledby="titulo-funcionalidades">
   <div class="func-header">
     <div class="section-label">Verificacoes</div>
-    <h2 class="section-title" style="margin:0 auto;">Tudo que o Siconfi verifica, <em>antes</em> de voce enviar</h2>
+    <h2 class="section-title" style="margin:0 auto;" id="titulo-funcionalidades">Tudo que o Siconfi verifica, <em>antes</em> de voce enviar</h2>
   </div>
   <div class="func-grid">
     <div class="func-card"><div class="func-num">01</div><h3>Saldos entre meses</h3><p>Confere se o saldo final do mes anterior e igual ao saldo inicial do mes atual. Detecta descontinuidades nos registros contabeis.</p><span class="func-tag tag-ativo">Ativo</span></div>
@@ -250,7 +256,7 @@
   </div>
 </section>
 
-<section class="como" id="como">
+<section class="como" id="como" aria-labelledby="titulo-como">
   <div class="como-inner">
     <div class="como-header">
       <div class="section-label">Como funciona</div>
@@ -265,10 +271,10 @@
   </div>
 </section>
 
-<section class="paraquem" id="paraquem">
+<section class="paraquem" id="paraquem" aria-labelledby="titulo-paraquem">
   <div style="text-align:center;max-width:560px;margin:0 auto;">
     <div class="section-label">Para quem é</div>
-    <h2 class="section-title" style="margin:0 auto;">Feito para quem <em>responde pela qualidade</em> das contas publicas</h2>
+    <h2 class="section-title" style="margin:0 auto;" id="titulo-paraquem">Feito para quem <em>responde pela qualidade</em> das contas publicas</h2>
   </div>
   <div class="paraquem-grid">
     <div class="paraquem-card"><div class="paraquem-icon">🏛️</div><h3>Secretarias de Finanças</h3><p>Gestores que precisam garantir a qualidade da informacão antes do envio e manter o municipio bem posicionado no Ranking Siconfi.</p></div>
@@ -277,10 +283,10 @@
   </div>
 </section>
 
-<section class="precos" id="precos">
+<section class="precos" id="precos" aria-labelledby="titulo-precos">
   <div class="precos-header">
     <div class="section-label" style="color:var(--ouro2);">Planos</div>
-    <h2 class="section-title" style="color:white;margin:0 auto;max-width:100%;">Simples e transparente</h2>
+    <h2 class="section-title" style="color:white;margin:0 auto;max-width:100%;" id="titulo-precos">Simples e transparente</h2>
     <p style="color:rgba(255,255,255,0.4);margin-top:0.75rem;font-size:0.95rem;">Sem contratos longos. Cancele quando quiser.</p>
   </div>
   <div class="precos-grid">
@@ -327,7 +333,8 @@
   </div>
 </section>
 
-<footer>
+</main>
+<footer role="contentinfo">
   <p>2025 SICONFI Verificador - Ferramenta de Auxílio à Prestação de Contas</p>
   <div style="display:flex;gap:1.5rem;">
     <a href="https://verificador-production.up.railway.app/termos">Termos de Uso</a>
@@ -336,32 +343,32 @@
 </footer>
 
 
-<div class="modal-overlay" id="modalInteresse">
+<div class="modal-overlay" id="modalInteresse" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" aria-hidden="true">
   <div class="modal-box">
     <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
     <div id="modalForm">
-      <h3>Quero participar</h3>
+      <h3 id="modalTitulo">Quero participar</h3>
       <p>Estamos em fase inicial e entramos em contato pessoalmente com cada interessado. Deixe seus dados e te procuramos em breve.</p>
       <div class="modal-plano" id="modalPlanoLabel"></div>
       <div class="modal-group">
-        <label>Seu nome</label>
-        <input type="text" id="inputNome" placeholder="Ex: Maria Silva">
+        <label for="inputNome">Seu nome <span aria-hidden="true" style="color:#e74c3c">*</span></label>
+        <input type="text" id="inputNome" aria-required="true" autocomplete="name" placeholder="Ex: Maria Silva">
       </div>
       <div class="modal-group">
-        <label>E-mail</label>
-        <input type="email" id="inputEmail" placeholder="seu@email.com">
+        <label for="inputEmail">E-mail <span aria-hidden="true" style="color:#e74c3c">*</span></label>
+        <input type="email" id="inputEmail" aria-required="true" autocomplete="email" placeholder="seu@email.com">
       </div>
       <div class="modal-group">
-        <label>Município ou escritório que representa</label>
-        <input type="text" id="inputOrg" placeholder="Ex: Prefeitura de Belo Horizonte">
+        <label for="inputOrg">Município ou escritório que representa</label>
+        <input type="text" id="inputOrg" autocomplete="organization" placeholder="Ex: Prefeitura de Belo Horizonte">
       </div>
       <div class="modal-group">
-        <label>Mensagem (opcional)</label>
+        <label for="inputMsg">Mensagem (opcional)</label>
         <textarea id="inputMsg" rows="3" placeholder="Conte um pouco sobre sua necessidade..."></textarea>
       </div>
       <button class="btn-enviar" onclick="enviarInteresse()">Enviar interesse</button>
     </div>
-    <div class="modal-sucesso" id="modalSucesso">
+    <div class="modal-sucesso" id="modalSucesso" role="status" aria-live="polite">
       <div class="check">✅</div>
       <h4>Recebemos seu interesse!</h4>
       <p>Entraremos em contato em breve no e-mail informado. Obrigado pela confiança!</p>
@@ -378,15 +385,24 @@
     document.getElementById('modalForm').style.display = 'block';
     document.getElementById('modalSucesso').style.display = 'none';
     document.getElementById('modalInteresse').classList.add('aberto');
+    document.getElementById('modalInteresse').setAttribute('aria-hidden','false');
+    setTimeout(function(){var f=document.getElementById('inputNome');if(f)f.focus();},50);
     document.body.style.overflow = 'hidden';
   }
 
   function fecharModal() {
     document.getElementById('modalInteresse').classList.remove('aberto');
+    document.getElementById('modalInteresse').setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var m = document.getElementById('modalInteresse');
+        if (m && m.classList.contains('aberto')) fecharModal();
+      }
+    });
     document.getElementById('modalInteresse').addEventListener('click', function(e) {
       if (e.target === this) fecharModal();
     });
