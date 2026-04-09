@@ -198,8 +198,8 @@
   </nav>
   <div class="hero-content">
     <div class="hero-badge">Ferramenta de Auxílio à Prestação de Contas</div>
-    <h1>Evite divergencias na MSC <em>antes</em> de enviar ao Siconfi</h1>
-    <p class="hero-sub">Analise automatica da Matriz de Saldos Contabeis com mais de 14 verificacoes baseadas na metodologia oficial da STN. Identifique erros em segundos, nao depois da entrega.</p>
+    <h1>Evite divergências na MSC <em>antes</em> de enviar ao Siconfi</h1>
+    <p class="hero-sub">Analise automática da Matriz de Saldos Contabeis com mais de 14 verificacoes baseadas na metodologia oficial da STN. Identifique erros em segundos, nao depois da entrega.</p>
     <div class="hero-actions">
       <a href="https://verificador-production.up.railway.app/login" class="btn-primary">Começar agora</a>
       <a href="#funcionalidades" class="btn-secondary">Ver todas as verificações</a>
@@ -218,13 +218,13 @@
     <div>
       <div class="section-label">O problema</div>
       <h2 class="section-title" style="color:white;max-width:100%;">A MSC errada custa caro para o municipio</h2>
-      <p class="problema-text">O Ranking de Qualidade do Siconfi avalia automaticamente dezenas de criterios. Erros que parecem pequenos como uma conta sem natureza de despesa ou um saldo inconsistente impactam diretamente a pontuacao do municipio e podem sinalizar irregularidades para os tribunais de contas.</p>
+      <p class="problema-text">O Ranking de Qualidade do Siconfi avalia automáticamente dezenas de criterios. Erros que parecem pequenos como uma conta sem natureza de despesa ou um saldo inconsistente impactam diretamente a pontuacão do municipio e podem sinalizar irregularidades para os tribunais de contas.</p>
     </div>
     <div class="problema-cards">
-      <div class="problema-card"><div class="problema-icon">⚠️</div><div><h4>Movimentacao inconsistente</h4><p>SI + MOV diferente de SF em qualquer conta gera alerta automatico no Siconfi e pode impedir o carregamento da MSC.</p></div></div>
-      <div class="problema-card"><div class="problema-icon">📋</div><div><h4>Detalhamento incompleto</h4><p>Despesas sem natureza, receitas sem fonte de recursos ou funcao/subfuncao ausente resultam em penalizacao no ranking.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">⚠️</div><div><h4>Movimentacão inconsistente</h4><p>SI + MOV diferente de SF em qualquer conta gera alerta automatico no Siconfi e pode impedir o carregamento da MSC.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">📋</div><div><h4>Detalhamento incompleto</h4><p>Despesas sem natureza, receitas sem fonte de recursos ou funcão/subfuncão ausente resultam em penalizacão no ranking.</p></div></div>
       <div class="problema-card"><div class="problema-icon">🏛️</div><div><h4>Fontes e classes incorretas</h4><p>Municipios usando fontes da Uniao ou MSCs com classes zeradas sao sinalizados pelo STN como inconsistencias graves.</p></div></div>
-      <div class="problema-card"><div class="problema-icon">🔒</div><div><h4>Descoberto apenas depois</h4><p>Sem verificacao previa, os erros so aparecem apos o envio, quando a correcao ja envolve reenvio e justificativas.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">🔒</div><div><h4>Descoberto apenas depois</h4><p>Sem verificacão previa, os erros so aparecem apos o envio, quando a correcão ja envolve reenvio e justificativas.</p></div></div>
     </div>
   </div>
 </section>
@@ -236,16 +236,16 @@
   </div>
   <div class="func-grid">
     <div class="func-card"><div class="func-num">01</div><h3>Saldos entre meses</h3><p>Confere se o saldo final do mes anterior e igual ao saldo inicial do mes atual. Detecta descontinuidades nos registros contabeis.</p><span class="func-tag tag-ativo">Ativo</span></div>
-    <div class="func-card"><div class="func-num">02</div><h3>Movimentacao inconsistente (D1_00018)</h3><p>Verifica se SI + MOV = SF para cada conta e combinacao de informacoes complementares.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">02</div><h3>Movimentacão inconsistente (D1_00018)</h3><p>Verifica se SI + MOV = SF para cada conta e combinacão de informacoes complementares.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">03</div><h3>Natureza das contas (PCASP)</h3><p>Compara a natureza de saldo informada com o padrao do PCASP Estendido 2026. Detecta naturezas invertidas.</p><span class="func-tag tag-ativo">Ativo</span></div>
-    <div class="func-card"><div class="func-num">04</div><h3>Financeiro sem fonte (D1_00027)</h3><p>Contas com atributo Financeiro devem ter Fonte ou Destinacao de Recursos associada.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">04</div><h3>Financeiro sem fonte (D1_00027)</h3><p>Contas com atributo Financeiro devem ter Fonte ou Destinacão de Recursos associada.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">05</div><h3>Classes de contas</h3><p>Verifica se ha valores nas tres grandes classes: Patrimonial, Orcamentaria e Controle.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">06</div><h3>Receita sem FR ou NR</h3><p>Contas de receita orcamentaria sem Fonte de Recursos ou Natureza de Receita associada.</p><span class="func-tag tag-ativo">Ativo</span></div>
-    <div class="func-card"><div class="func-num">07</div><h3>Despesa sem ND, FS ou FR</h3><p>Contas de despesa orcamentaria sem Natureza de Despesa, Funcao/Subfuncao ou Fonte de Recursos.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">07</div><h3>Despesa sem ND, FS ou FR</h3><p>Contas de despesa orcamentaria sem Natureza de Despesa, Funcão/Subfuncão ou Fonte de Recursos.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">08</div><h3>Fontes da Uniao em estados e municipios</h3><p>Detecta uso indevido de fontes de recursos da Uniao por estados e municipios.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">09</div><h3>Verificacoes de encerramento</h3><p>Contas com flag E devem ter saldo zero, e equivalencia patrimonial deve ter contrapartida no ativo.</p><span class="func-tag tag-ativo">Ativo</span></div>
     <div class="func-card"><div class="func-num">10</div><h3>Estoques e previdencia</h3><p>Verifica saldo de estoques e consistencia de creditos previdenciarios parcelados.</p><span class="func-tag tag-ativo">Ativo</span></div>
-    <div class="func-card"><div class="func-num">11</div><h3>Cruzamento com RREO e RGF</h3><p>Comparacao dos valores da MSC com os demonstrativos fiscais obrigatorios da LRF.</p><span class="func-tag tag-breve">Em breve</span></div>
+    <div class="func-card"><div class="func-num">11</div><h3>Cruzamento com RREO e RGF</h3><p>Comparacão dos valores da MSC com os demonstrativos fiscais obrigatorios da LRF.</p><span class="func-tag tag-breve">Em breve</span></div>
     <div class="func-card"><div class="func-num">+100</div><h3>Mais verificacoes a caminho</h3><p>Mais de 100 verificacoes na Matriz e Anexos por vir, cobrindo RREO, RGF, historico mensal e cruzamento com demonstrativos fiscais da LRF.</p><span class="func-tag tag-breve">Em breve</span></div>
   </div>
 </section>
@@ -258,9 +258,9 @@
     </div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Faça login no sistema</h3><p>Acesse com seu usuario e senha. Cada municipio tem seu proprio acesso seguro, gerenciado pelo administrador da conta.</p></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Envie os arquivos CSV da MSC</h3><p>Carregue o arquivo do mes anterior e do mes atual diretamente do sistema contabil, no padrao Siconfi, sem nenhuma adaptacao.</p></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Informe o tipo de ente e período</h3><p>Selecione se e Municipio, Estado ou DF. Para matrizes de encerramento, marque a opcao correspondente para ativar verificacoes adicionais.</p></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Receba o diagnóstico completo</h3><p>Em segundos, visualize todas as divergencias organizadas por categoria. Exporte o relatorio em PDF para documentacao.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Envie os arquivos CSV da MSC</h3><p>Carregue o arquivo do mes anterior e do mes atual diretamente do sistema contabil, no padrao Siconfi, sem nenhuma adaptacão.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Informe o tipo de ente e período</h3><p>Selecione se e Municipio, Estado ou DF. Para matrizes de encerramento, marque a opcão correspondente para ativar verificacoes adicionais.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Receba o diagnóstico completo</h3><p>Em segundos, visualize todas as divergências organizadas por categoria. Exporte o relatorio em PDF para documentacão.</p></div></div>
     </div>
   </div>
 </section>
@@ -271,8 +271,8 @@
     <h2 class="section-title" style="margin:0 auto;">Feito para quem <em>responde pela qualidade</em> das contas publicas</h2>
   </div>
   <div class="paraquem-grid">
-    <div class="paraquem-card"><div class="paraquem-icon">🏛️</div><h3>Secretarias de Finanças</h3><p>Gestores que precisam garantir a qualidade da informacao antes do envio e manter o municipio bem posicionado no Ranking Siconfi.</p></div>
-    <div class="paraquem-card"><div class="paraquem-icon">📊</div><h3>Contadores de Prefeituras</h3><p>Profissionais responsaveis pelo fechamento mensal que precisam de uma verificacao rapida antes do envio ao Siconfi.</p></div>
+    <div class="paraquem-card"><div class="paraquem-icon">🏛️</div><h3>Secretarias de Finanças</h3><p>Gestores que precisam garantir a qualidade da informacão antes do envio e manter o municipio bem posicionado no Ranking Siconfi.</p></div>
+    <div class="paraquem-card"><div class="paraquem-icon">📊</div><h3>Contadores de Prefeituras</h3><p>Profissionais responsaveis pelo fechamento mensal que precisam de uma verificacão rapida antes do envio ao Siconfi.</p></div>
     <div class="paraquem-card"><div class="paraquem-icon">🏢</div><h3>Escritórios de Contabilidade Publica</h3><p>Empresas que prestam servico para multiplos municipios e precisam de agilidade e seguranca na analise de cada cliente.</p></div>
   </div>
 </section>
@@ -304,7 +304,7 @@
       <ul class="preco-lista">
         <li>Até 5 usuários inclusos</li>
         <li>Todas as verificações ativas e futuras</li>
-        <li>Exportacao em PDF</li>
+        <li>Exportacão em PDF</li>
         <li>Suporte prioritario</li>
         <li>Acesso antecipado a novos recursos</li>
       </ul>
@@ -407,7 +407,7 @@
     var corpo = [
       'Nome: ' + nome,
       'E-mail: ' + email,
-      'Organizacao: ' + (org || 'Nao informado'),
+      'organização: ' + (org || 'Nao informado'),
       'Plano de interesse: ' + planoSelecionado,
       '',
       'Mensagem: ' + (msg || 'Nenhuma mensagem adicional.')
