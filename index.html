@@ -307,7 +307,421 @@
       <button class="btn-preco" onclick="abrirInteresse('Escritorio')">Tenho interesse</button>
     </div>
   </div>
-  <p class="preco-nota">Interesse em licitacao municipal? <a href="mailto:contato@exemplo.com" style="color:rgba(93,173,226,0.8);text-decoration:none;">Entre em contato</a> para discutir contrato institucional.</p>
+  <p class="preco-nota">Interesse em licitacao municipal? <a href="/cdn-cgi/l/email-protection#395a56574d584d56795c415c54495556175a5654" style="color:rgba(93,173,226,0.8);text-decoration:none;">Entre em contato</a> para discutir contrato institucional.</p>
+</section>
+
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <h2>Pronto para enviar a MSC <em>com confianca</em>?</h2>
+    <p>Comece hoje mesmo. Sem cartao de credito, sem compromisso.</p>
+    <a href="https://verificador-production.up.railway.app/login" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">Acessar o verificador</a>
+  </div>
+</section>
+
+<footer>
+  <p>2025 SICONFI Verificador - Ferramenta de Auxilio a Prestacao de Contas</p>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="https://verificador-production.up.railway.app/termos">Termos de Uso</a>
+    <a href="https://verificador-production.up.railway.app/login">Acessar sistema</a>
+  </div>
+</footer>
+
+
+<div class="modal-overlay" id="modalInteresse">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
+    <div id="modalForm">
+      <h3>Quero participar</h3>
+      <p>Estamos em fase inicial e entramos em contato pessoalmente com cada interessado. Deixe seus dados e te procuramos em breve.</p>
+      <div class="modal-plano" id="modalPlanoLabel"></div>
+      <div class="modal-group">
+        <label>Seu nome</label>
+        <input type="text" id="inputNome" placeholder="Ex: Maria Silva">
+      </div>
+      <div class="modal-group">
+        <label>E-mail</label>
+        <input type="email" id="inputEmail" placeholder="seu@email.com">
+      </div>
+      <div class="modal-group">
+        <label>Municipio ou escritorio que representa</label>
+        <input type="text" id="inputOrg" placeholder="Ex: Prefeitura de Belo Horizonte">
+      </div>
+      <div class="modal-group">
+        <label>Mensagem (opcional)</label>
+        <textarea id="inputMsg" rows="3" placeholder="Conte um pouco sobre sua necessidade..."></textarea>
+      </div>
+      <button class="btn-enviar" onclick="enviarInteresse()">Enviar interesse</button>
+    </div>
+    <div class="modal-sucesso" id="modalSucesso">
+      <div class="check">✅</div>
+      <h4>Recebemos seu interesse!</h4>
+      <p>Entraremos em contato em breve no e-mail informado. Obrigado pela confianca!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var planoSelecionado = '';
+
+  function abrirInteresse(plano) {
+    planoSelecionado = plano;
+    document.getElementById('modalPlanoLabel').textContent = 'Plano ' + plano;
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('modalSucesso').style.display = 'none';
+    document.getElementById('modalInteresse').classList.add('aberto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    document.getElementById('modalInteresse').classList.remove('aberto');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('modalInteresse').addEventListener('click', function(e) {
+      if (e.target === this) fecharModal();
+    });
+  });
+
+  function enviarInteresse() {
+    var nome  = document.getElementById('inputNome').value.trim();
+    var email = document.getElementById('inputEmail').value.trim();
+    var org   = document.getElementById('inputOrg').value.trim();
+    var msg   = document.getElementById('inputMsg').value.trim();
+
+    if (!nome || !email) {
+      alert('Por favor, preencha nome e e-mail.');
+      return;
+    }
+
+    var nl = String.fromCharCode(10);
+    var corpo = [
+      'Nome: ' + nome,
+      'E-mail: ' + email,
+      'Organizacao: ' + (org || 'Nao informado'),
+      'Plano de interesse: ' + planoSelecionado,
+      '',
+      'Mensagem: ' + (msg || 'Nenhuma mensagem adicional.')
+    ].join(nl);
+
+    var assunto = encodeURIComponent('Interesse no SICONFI Verificador - Plano ' + planoSelecionado);
+    window.location.href = 'mailto:siconfiverificador@gmail.com?subject=' + assunto + '&body=' + encodeURIComponent(corpo);
+
+    setTimeout(function() {
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSucesso').style.display = 'block';
+    }, 500);
+  }
+</script>E html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SICONFI Verificador — Ferramenta de Auxílio à Prestação de Contas</title>
+<meta name="description" content="Analise sua Matriz de Saldos Contábeis antes de enviar ao Siconfi. Mais de 14 verificações automáticas baseadas na metodologia da STN.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde:   #1a5276;
+    --verde2:  #2980b9;
+    --ouro:    #1a6fa8;
+    --ouro2:   #5dade2;
+    --escuro:  #0d1b2a;
+    --escuro2: #102640;
+    --claro:   #eaf4fb;
+    --claro2:  #f8fbfe;
+    --cinza:   #5d7a8a;
+    --borda:   rgba(41,128,185,0.25);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--claro2); color:var(--escuro); overflow-x:hidden; }
+
+  .hero { min-height:100vh; background:var(--escuro); position:relative; display:flex; flex-direction:column; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(36,144,95,0.18) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 20% 80%, rgba(41,128,185,0.12) 0%, transparent 60%); }
+  .hero-grid { position:absolute; inset:0; opacity:0.04; background-image: linear-gradient(rgba(41,128,185,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(41,128,185,0.8) 1px, transparent 1px); background-size:48px 48px; }
+
+  nav { position:relative; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:1.5rem 4rem; border-bottom:1px solid rgba(41,128,185,0.15); }
+  .logo { display:flex; align-items:center; gap:0.75rem; }
+  .logo-mark { width:36px; height:36px; background:linear-gradient(135deg,var(--verde2),var(--verde)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:1.1rem; color:white; }
+  .logo-text { font-family:'DM Serif Display',serif; font-size:1.1rem; color:white; letter-spacing:0.02em; }
+  .logo-text span { color:var(--ouro2); }
+  .nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+  .nav-links a { color:rgba(255,255,255,0.65); text-decoration:none; font-size:0.875rem; font-weight:500; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--ouro2); }
+  .nav-cta { background:linear-gradient(135deg,var(--verde2),var(--verde)); color:white !important; padding:0.55rem 1.4rem; border-radius:6px; font-weight:600 !important; border:1px solid rgba(36,144,95,0.5); transition:all 0.2s !important; }
+  .nav-cta:hover { background:linear-gradient(135deg,var(--ouro),var(--ouro2)) !important; color:var(--escuro) !important; }
+
+  .hero-content { position:relative; z-index:5; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:5rem 2rem 6rem; }
+  .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(41,128,185,0.12); border:1px solid var(--borda); color:var(--ouro2); padding:0.4rem 1rem; border-radius:100px; font-size:0.78rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:2rem; animation:fadeUp 0.8s ease both; }
+  .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--ouro2); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.8rem,6vw,5rem); color:white; line-height:1.1; max-width:820px; margin-bottom:1.5rem; animation:fadeUp 0.8s 0.1s ease both; }
+  h1 em { font-style:italic; color:var(--ouro2); }
+  .hero-sub { font-size:clamp(1rem,2vw,1.2rem); color:rgba(255,255,255,0.55); max-width:580px; line-height:1.7; margin-bottom:3rem; animation:fadeUp 0.8s 0.2s ease both; }
+  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; animation:fadeUp 0.8s 0.3s ease both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  .btn-primary { background:linear-gradient(135deg,var(--ouro),var(--ouro2)); color:var(--escuro); padding:0.85rem 2rem; border-radius:8px; font-weight:700; font-size:0.95rem; text-decoration:none; transition:all 0.2s; box-shadow:0 4px 20px rgba(41,128,185,0.3); display:inline-block; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(41,128,185,0.45); }
+  .btn-secondary { background:transparent; color:rgba(255,255,255,0.8); padding:0.85rem 2rem; border-radius:8px; font-weight:500; font-size:0.95rem; text-decoration:none; border:1px solid rgba(255,255,255,0.2); transition:all 0.2s; display:inline-block; }
+  .btn-secondary:hover { border-color:var(--ouro2); color:var(--ouro2); }
+
+  .hero-stats { position:relative; z-index:5; display:flex; justify-content:center; border-top:1px solid rgba(41,128,185,0.15); animation:fadeUp 0.8s 0.4s ease both; }
+  .stat { flex:1; max-width:220px; text-align:center; padding:1.75rem 2rem; border-right:1px solid rgba(41,128,185,0.15); }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-family:'DM Serif Display',serif; font-size:2.2rem; color:var(--ouro2); line-height:1; margin-bottom:0.3rem; }
+  .stat-label { font-size:0.78rem; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.08em; font-weight:500; }
+
+  section { padding:6rem 4rem; }
+  .section-label { font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--verde2); margin-bottom:0.75rem; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); color:var(--escuro); line-height:1.2; max-width:560px; }
+  .section-title em { color:var(--verde2); font-style:italic; }
+
+  .problema { background:var(--escuro2); color:white; }
+  .problema-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1100px; margin:0 auto; }
+  .problema .section-title { color:white; max-width:100%; }
+  .problema-text { font-size:1.05rem; color:rgba(255,255,255,0.6); line-height:1.8; margin-top:1.5rem; }
+  .problema-cards { display:flex; flex-direction:column; gap:1rem; }
+  .problema-card { background:rgba(255,255,255,0.04); border:1px solid rgba(41,128,185,0.15); border-radius:12px; padding:1.25rem 1.5rem; display:flex; align-items:flex-start; gap:1rem; transition:border-color 0.2s; }
+  .problema-card:hover { border-color:rgba(41,128,185,0.35); }
+  .problema-icon { width:38px; height:38px; border-radius:8px; background:rgba(41,128,185,0.12); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .problema-card h4 { font-size:0.9rem; font-weight:600; color:white; margin-bottom:0.25rem; }
+  .problema-card p { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.6; }
+
+  .funcionalidades { background:var(--claro2); }
+  .func-header { text-align:center; max-width:600px; margin:0 auto 4rem; }
+  .func-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .func-card { background:white; border:1px solid rgba(0,0,0,0.07); border-radius:16px; padding:2rem; transition:all 0.25s; position:relative; overflow:hidden; }
+  .func-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--verde2),var(--ouro)); opacity:0; transition:opacity 0.25s; }
+  .func-card:hover { border-color:rgba(26,107,74,0.2); box-shadow:0 8px 30px rgba(41,128,185,0.12); transform:translateY(-3px); }
+  .func-card:hover::before { opacity:1; }
+  .func-num { font-family:'DM Serif Display',serif; font-size:2.5rem; color:rgba(41,128,185,0.12); line-height:1; margin-bottom:1rem; }
+  .func-card h3 { font-size:1rem; font-weight:600; color:var(--escuro); margin-bottom:0.5rem; }
+  .func-card p { font-size:0.85rem; color:var(--cinza); line-height:1.7; }
+  .func-tag { display:inline-block; margin-top:1rem; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:4px; }
+  .tag-ativo { background:rgba(41,128,185,0.12); color:var(--verde2); }
+  .tag-breve { background:rgba(41,128,185,0.1); color:var(--ouro); }
+
+  .como { background:var(--claro); }
+  .como-inner { max-width:900px; margin:0 auto; }
+  .como-header { margin-bottom:3.5rem; }
+  .steps { display:flex; flex-direction:column; position:relative; }
+  .steps::before { content:''; position:absolute; left:23px; top:48px; bottom:48px; width:2px; background:linear-gradient(to bottom,var(--verde2),var(--ouro2)); opacity:0.3; }
+  .step { display:flex; gap:2rem; align-items:flex-start; padding:2rem 0; }
+  .step-num { width:48px; height:48px; border-radius:50%; flex-shrink:0; background:var(--escuro); color:var(--ouro2); display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:1.1rem; border:2px solid rgba(41,128,185,0.3); position:relative; z-index:1; }
+  .step-body h3 { font-size:1.05rem; font-weight:600; color:var(--escuro); margin-bottom:0.4rem; }
+  .step-body p { font-size:0.9rem; color:var(--cinza); line-height:1.7; }
+
+  .paraquem { background:var(--claro2); }
+  .paraquem-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; max-width:1000px; margin:3rem auto 0; }
+  .paraquem-card { text-align:center; padding:2.5rem 1.5rem; border:1px solid rgba(0,0,0,0.07); border-radius:16px; background:white; transition:all 0.2s; }
+  .paraquem-card:hover { border-color:rgba(41,128,185,0.2); box-shadow:0 6px 24px rgba(41,128,185,0.08); }
+  .paraquem-icon { font-size:2.5rem; margin-bottom:1rem; }
+  .paraquem-card h3 { font-size:1rem; font-weight:600; color:var(--escuro); margin-bottom:0.5rem; }
+  .paraquem-card p { font-size:0.85rem; color:var(--cinza); line-height:1.7; }
+
+  .precos { background:var(--escuro); }
+  .precos .section-label { color:var(--ouro2); }
+  .precos-header { text-align:center; margin-bottom:3.5rem; }
+  .precos-grid { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; max-width:900px; margin:0 auto; }
+  .preco-card { background:rgba(255,255,255,0.04); border:1px solid rgba(41,128,185,0.2); border-radius:20px; padding:2.5rem; flex:1; min-width:280px; position:relative; }
+  .preco-card.destaque { border-color:var(--ouro); background:rgba(41,128,185,0.06); }
+  .preco-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--ouro),var(--ouro2)); color:var(--escuro); font-size:0.72rem; font-weight:800; padding:0.25rem 0.9rem; border-radius:100px; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+  .preco-nome { font-size:0.8rem; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem; }
+  .preco-valor { margin-bottom:1.5rem; }
+  .preco-valor .valor { font-family:'DM Serif Display',serif; font-size:3rem; color:white; line-height:1; }
+  .preco-valor .moeda { font-size:1.2rem; vertical-align:top; margin-top:0.4rem; display:inline-block; color:var(--ouro2); }
+  .preco-valor .periodo { font-size:0.82rem; color:rgba(255,255,255,0.4); margin-left:0.25rem; }
+  .preco-desc { font-size:0.85rem; color:rgba(255,255,255,0.45); margin-bottom:1.75rem; line-height:1.6; }
+  .preco-lista { list-style:none; display:flex; flex-direction:column; gap:0.7rem; margin-bottom:2rem; }
+  .preco-lista li { font-size:0.85rem; color:rgba(255,255,255,0.65); display:flex; align-items:center; gap:0.6rem; }
+  .preco-lista li::before { content:'checkmark'; content:'✓'; color:var(--ouro2); font-weight:700; font-size:0.8rem; }
+  .btn-preco { display:block; width:100%; text-align:center; padding:0.8rem; border-radius:8px; font-weight:600; font-size:0.9rem; text-decoration:none; transition:all 0.2s; border:1px solid rgba(41,128,185,0.35); color:var(--ouro2); }
+  .btn-preco:hover { background:rgba(41,128,185,0.1); }
+  .preco-card.destaque .btn-preco { background:linear-gradient(135deg,var(--ouro),var(--ouro2)); color:var(--escuro); border-color:transparent; font-weight:700; }
+  .preco-card.destaque .btn-preco:hover { box-shadow:0 6px 20px rgba(41,128,185,0.35); transform:translateY(-1px); }
+  .preco-nota { text-align:center; margin-top:2rem; font-size:0.82rem; color:rgba(255,255,255,0.3); }
+
+  .cta-final { background:linear-gradient(135deg,#1a4a6b 0%,var(--escuro) 100%); text-align:center; position:relative; overflow:hidden; }
+  .cta-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 80% at 50% 50%, rgba(41,128,185,0.1) 0%, transparent 70%); }
+  .cta-final-inner { position:relative; z-index:1; max-width:650px; margin:0 auto; }
+  .cta-final h2 { font-family:'DM Serif Display',serif; font-size:clamp(2rem,4vw,3rem); color:white; margin-bottom:1rem; line-height:1.2; }
+  .cta-final h2 em { color:var(--ouro2); font-style:italic; }
+  .cta-final p { font-size:1.05rem; color:rgba(255,255,255,0.6); margin-bottom:2.5rem; line-height:1.7; }
+
+  footer { background:var(--escuro); padding:2rem 4rem; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(41,128,185,0.1); }
+  footer p { font-size:0.8rem; color:rgba(255,255,255,0.25); }
+  footer a { font-size:0.8rem; color:rgba(255,255,255,0.35); text-decoration:none; transition:color 0.2s; }
+  footer a:hover { color:var(--ouro2); }
+
+
+  /* Modal de interesse */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+  .modal-overlay.aberto { display:flex; }
+  .modal-box { background:white; border-radius:16px; padding:2.5rem; width:100%; max-width:480px; margin:1rem; position:relative; animation:fadeUp 0.3s ease; }
+  .modal-box h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--escuro); margin-bottom:0.5rem; }
+  .modal-box p { font-size:0.9rem; color:var(--cinza); margin-bottom:1.5rem; line-height:1.6; }
+  .modal-close { position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.3rem; color:#aaa; cursor:pointer; width:auto; padding:0; }
+  .modal-close:hover { color:var(--escuro); }
+  .modal-group { margin-bottom:1rem; }
+  .modal-group label { display:block; font-size:0.82rem; font-weight:600; color:var(--escuro); margin-bottom:0.35rem; }
+  .modal-group input, .modal-group textarea { width:100%; padding:0.65rem 0.75rem; border:1px solid #ddd; border-radius:6px; font-size:0.9rem; font-family:'DM Sans',sans-serif; outline:none; transition:border-color 0.2s; resize:none; }
+  .modal-group input:focus, .modal-group textarea:focus { border-color:var(--verde2); }
+  .modal-plano { display:inline-block; background:rgba(41,128,185,0.1); color:var(--verde2); font-size:0.75rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; margin-bottom:1.25rem; letter-spacing:0.06em; text-transform:uppercase; }
+  .btn-enviar { background:linear-gradient(135deg,var(--verde2),var(--verde)); color:white; border:none; border-radius:8px; padding:0.8rem 1.5rem; font-size:0.95rem; font-weight:600; cursor:pointer; width:100%; transition:all 0.2s; margin-top:0.5rem; }
+  .btn-enviar:hover { opacity:0.9; transform:translateY(-1px); }
+  .modal-sucesso { display:none; text-align:center; padding:1rem 0; }
+  .modal-sucesso .check { font-size:3rem; margin-bottom:1rem; }
+  .modal-sucesso h4 { font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--escuro); margin-bottom:0.5rem; }
+  .modal-sucesso p { font-size:0.88rem; color:var(--cinza); }
+
+  @media (max-width:900px) {
+    nav { padding:1.25rem 1.5rem; }
+    .nav-links { display:none; }
+    section { padding:4rem 1.5rem; }
+    .problema-grid { grid-template-columns:1fr; gap:2.5rem; }
+    .paraquem-grid { grid-template-columns:1fr; }
+    .hero-stats { flex-wrap:wrap; }
+    .stat { min-width:50%; }
+    footer { flex-direction:column; gap:0.75rem; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div class="logo-text">SICONFI <span>Verificador</span></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#funcionalidades">Verificacoes</a></li>
+      <li><a href="#como">Como funciona</a></li>
+      <li><a href="#paraquem">Para quem</a></li>
+      <li><a href="#precos">Planos</a></li>
+      <li><a href="https://verificador-production.up.railway.app/login" class="nav-cta">Acessar sistema</a></li>
+    </ul>
+  </nav>
+  <div class="hero-content">
+    <div class="hero-badge">Ferramenta de Auxilio a Prestacao de Contas</div>
+    <h1>Evite divergencias na MSC <em>antes</em> de enviar ao Siconfi</h1>
+    <p class="hero-sub">Analise automatica da Matriz de Saldos Contabeis com mais de 14 verificacoes baseadas na metodologia oficial da STN. Identifique erros em segundos, nao depois da entrega.</p>
+    <div class="hero-actions">
+      <a href="https://verificador-production.up.railway.app/login" class="btn-primary">Comecar agora</a>
+      <a href="#funcionalidades" class="btn-secondary">Ver todas as verificacoes</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">14+</div><div class="stat-label">Verificacoes automaticas</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Baseado na metodologia STN</div></div>
+    <div class="stat"><div class="stat-num">&lt; 1min</div><div class="stat-label">Para analisar uma MSC</div></div>
+    <div class="stat"><div class="stat-num">PDF</div><div class="stat-label">Relatorio exportavel</div></div>
+  </div>
+</section>
+
+<section class="problema" id="problema">
+  <div class="problema-grid">
+    <div>
+      <div class="section-label">O problema</div>
+      <h2 class="section-title" style="color:white;max-width:100%;">A MSC errada custa caro para o municipio</h2>
+      <p class="problema-text">O Ranking de Qualidade do Siconfi avalia automaticamente dezenas de criterios. Erros que parecem pequenos como uma conta sem natureza de despesa ou um saldo inconsistente impactam diretamente a pontuacao do municipio e podem sinalizar irregularidades para os tribunais de contas.</p>
+    </div>
+    <div class="problema-cards">
+      <div class="problema-card"><div class="problema-icon">⚠️</div><div><h4>Movimentacao inconsistente</h4><p>SI + MOV diferente de SF em qualquer conta gera alerta automatico no Siconfi e pode impedir o carregamento da MSC.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">📋</div><div><h4>Detalhamento incompleto</h4><p>Despesas sem natureza, receitas sem fonte de recursos ou funcao/subfuncao ausente resultam em penalizacao no ranking.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">🏛️</div><div><h4>Fontes e classes incorretas</h4><p>Municipios usando fontes da Uniao ou MSCs com classes zeradas sao sinalizados pelo STN como inconsistencias graves.</p></div></div>
+      <div class="problema-card"><div class="problema-icon">🔒</div><div><h4>Descoberto apenas depois</h4><p>Sem verificacao previa, os erros so aparecem apos o envio, quando a correcao ja envolve reenvio e justificativas.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="funcionalidades" id="funcionalidades">
+  <div class="func-header">
+    <div class="section-label">Verificacoes</div>
+    <h2 class="section-title" style="margin:0 auto;">Tudo que o Siconfi verifica, <em>antes</em> de voce enviar</h2>
+  </div>
+  <div class="func-grid">
+    <div class="func-card"><div class="func-num">01</div><h3>Saldos entre meses</h3><p>Confere se o saldo final do mes anterior e igual ao saldo inicial do mes atual. Detecta descontinuidades nos registros contabeis.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">02</div><h3>Movimentacao inconsistente (D1_00018)</h3><p>Verifica se SI + MOV = SF para cada conta e combinacao de informacoes complementares.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">03</div><h3>Natureza das contas (PCASP)</h3><p>Compara a natureza de saldo informada com o padrao do PCASP Estendido 2026. Detecta naturezas invertidas.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">04</div><h3>Financeiro sem fonte (D1_00027)</h3><p>Contas com atributo Financeiro devem ter Fonte ou Destinacao de Recursos associada.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">05</div><h3>Classes de contas</h3><p>Verifica se ha valores nas tres grandes classes: Patrimonial, Orcamentaria e Controle.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">06</div><h3>Receita sem FR ou NR</h3><p>Contas de receita orcamentaria sem Fonte de Recursos ou Natureza de Receita associada.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">07</div><h3>Despesa sem ND, FS ou FR</h3><p>Contas de despesa orcamentaria sem Natureza de Despesa, Funcao/Subfuncao ou Fonte de Recursos.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">08</div><h3>Fontes da Uniao em estados e municipios</h3><p>Detecta uso indevido de fontes de recursos da Uniao por estados e municipios.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">09</div><h3>Verificacoes de encerramento</h3><p>Contas com flag E devem ter saldo zero, e equivalencia patrimonial deve ter contrapartida no ativo.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">10</div><h3>Estoques e previdencia</h3><p>Verifica saldo de estoques e consistencia de creditos previdenciarios parcelados.</p><span class="func-tag tag-ativo">Ativo</span></div>
+    <div class="func-card"><div class="func-num">11</div><h3>Cruzamento com RREO e RGF</h3><p>Comparacao dos valores da MSC com os demonstrativos fiscais obrigatorios da LRF.</p><span class="func-tag tag-breve">Em breve</span></div>
+    <div class="func-card"><div class="func-num">+100</div><h3>Mais verificacoes a caminho</h3><p>Mais de 100 verificacoes na Matriz e Anexos por vir, cobrindo RREO, RGF, historico mensal e cruzamento com demonstrativos fiscais da LRF.</p><span class="func-tag tag-breve">Em breve</span></div>
+  </div>
+</section>
+
+<section class="como" id="como">
+  <div class="como-inner">
+    <div class="como-header">
+      <div class="section-label">Como funciona</div>
+      <h2 class="section-title">Da MSC ao relatorio <em>em menos de um minuto</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Faca login no sistema</h3><p>Acesse com seu usuario e senha. Cada municipio tem seu proprio acesso seguro, gerenciado pelo administrador da conta.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Envie os arquivos CSV da MSC</h3><p>Carregue o arquivo do mes anterior e do mes atual diretamente do sistema contabil, no padrao Siconfi, sem nenhuma adaptacao.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Informe o tipo de ente e periodo</h3><p>Selecione se e Municipio, Estado ou DF. Para matrizes de encerramento, marque a opcao correspondente para ativar verificacoes adicionais.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Receba o diagnostico completo</h3><p>Em segundos, visualize todas as divergencias organizadas por categoria. Exporte o relatorio em PDF para documentacao.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="paraquem" id="paraquem">
+  <div style="text-align:center;max-width:560px;margin:0 auto;">
+    <div class="section-label">Para quem e</div>
+    <h2 class="section-title" style="margin:0 auto;">Feito para quem <em>responde pela qualidade</em> das contas publicas</h2>
+  </div>
+  <div class="paraquem-grid">
+    <div class="paraquem-card"><div class="paraquem-icon">🏛️</div><h3>Secretarias de Financas</h3><p>Gestores que precisam garantir a qualidade da informacao antes do envio e manter o municipio bem posicionado no Ranking Siconfi.</p></div>
+    <div class="paraquem-card"><div class="paraquem-icon">📊</div><h3>Contadores de Prefeituras</h3><p>Profissionais responsaveis pelo fechamento mensal que precisam de uma verificacao rapida antes do envio ao Siconfi.</p></div>
+    <div class="paraquem-card"><div class="paraquem-icon">🏢</div><h3>Escritorios de Contabilidade Publica</h3><p>Empresas que prestam servico para multiplos municipios e precisam de agilidade e seguranca na analise de cada cliente.</p></div>
+  </div>
+</section>
+
+<section class="precos" id="precos">
+  <div class="precos-header">
+    <div class="section-label" style="color:var(--ouro2);">Planos</div>
+    <h2 class="section-title" style="color:white;margin:0 auto;max-width:100%;">Simples e transparente</h2>
+    <p style="color:rgba(255,255,255,0.4);margin-top:0.75rem;font-size:0.95rem;">Sem contratos longos. Cancele quando quiser.</p>
+  </div>
+  <div class="precos-grid">
+    <div class="preco-card">
+      <div class="preco-nome">Basico</div>
+      <div class="preco-valor"><span class="moeda">R$</span><span class="valor">97</span><span class="periodo">/mes por usuario</span></div>
+      <p class="preco-desc">Para contadores que precisam de uma verificacao confiavel antes de cada envio.</p>
+      <ul class="preco-lista">
+        <li>Todas as 10+ verificacoes ativas</li>
+        <li>Exportacao de relatorio em PDF</li>
+        <li>Suporte por e-mail</li>
+        <li>Acesso ao sistema 24h por dia</li>
+      </ul>
+      <button class="btn-preco" onclick="abrirInteresse('Basico')">Tenho interesse</button>
+    </div>
+    <div class="preco-card destaque">
+      <div class="preco-badge">Mais popular</div>
+      <div class="preco-nome">Escritorio</div>
+      <div class="preco-valor"><span class="moeda">R$</span><span class="valor">247</span><span class="periodo">/mes</span></div>
+      <p class="preco-desc">Para escritorios que atendem multiplos municipios com uma equipe dedicada.</p>
+      <ul class="preco-lista">
+        <li>Ate 5 usuarios inclusos</li>
+        <li>Todas as verificacoes ativas e futuras</li>
+        <li>Exportacao em PDF</li>
+        <li>Suporte prioritario</li>
+        <li>Acesso antecipado a novos recursos</li>
+      </ul>
+      <button class="btn-preco" onclick="abrirInteresse('Escritorio')">Tenho interesse</button>
+    </div>
+  </div>
+  <p class="preco-nota">Interesse em licitacao municipal? <a href="/cdn-cgi/l/email-protection#395a56574d584d56795c415c54495556175a5654" style="color:rgba(93,173,226,0.8);text-decoration:none;">Entre em contato</a> para discutir contrato institucional.</p>
 </section>
 
 <section class="cta-final">
@@ -395,29 +809,19 @@
 
     // Monta o mailto com os dados preenchidos
     const assunto = encodeURIComponent('Interesse no SICONFI Verificador - Plano ' + planoSelecionado);
-    const corpo   = encodeURIComponent(
-      'Nome: ' + nome + '
-' +
-      'E-mail: ' + email + '
-' +
-      'Organizacao: ' + (org || 'Nao informado') + '
-' +
-      'Plano de interesse: ' + planoSelecionado + '
-
-' +
-      'Mensagem:
-' + (msg || 'Nenhuma mensagem adicional.')
-    );
+    const sep = String.fromCharCode(10);
+    const partes = [
+      'Nome: ' + nome,
+      'E-mail: ' + email,
+      'Organizacao: ' + (org || 'Nao informado'),
+      'Plano: ' + planoSelecionado,
+      '',
+      'Mensagem: ' + (msg || 'Nenhuma mensagem adicional.')
+    ];
+    const corpo = encodeURIComponent(partes.join(sep));
 
     window.location.href = 'mailto:siconfiverificador@gmail.com?subject=' + assunto + '&body=' + corpo;
 
     // Mostra confirmação
     setTimeout(() => {
-      document.getElementById('modalForm').style.display = 'none';
-      document.getElementById('modalSucesso').style.display = 'block';
-    }, 500);
-  }
-</script>
-
-</body>
-</html>
+      document.getElementById('m
